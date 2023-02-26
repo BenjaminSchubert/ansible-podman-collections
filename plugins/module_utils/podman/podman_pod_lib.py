@@ -436,9 +436,6 @@ class PodmanPodDiff:
         if after in [['bridge'], ['host'], ['slirp4netns']]:
             net_mode_after = after[0]
 
-        if after and before and "slirp4netns" not in after[0] and after != ["newnet", "net2"] and after != ["net2"]:
-            self.module.fail_json(before=before, after=after, msg="NO")
-
         if net_mode_after and not before:
             # Remove differences between v1 and v2
             net_mode_after = net_mode_after.replace('bridge', 'default')
