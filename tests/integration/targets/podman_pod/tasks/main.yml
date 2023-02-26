@@ -1,5 +1,5 @@
-- name: Test podman pod
-  block:
+# - name: Test podman pod
+#   block:
 
 #     - name: Discover podman version
 #       shell: podman version | grep "^Version:" | awk {'print $2'}
