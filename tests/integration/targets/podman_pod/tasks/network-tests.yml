@@ -41,3 +41,25 @@
   assert:
     that:
       - info1 is changed
+
+- name: Run pod added network options
+  become: true
+  containers.podman.podman_pod:
+    executable: "{{ test_executable | default('podman') }}"
+    name: nettest
+    state: started
+    network: "{{ item.next_net }}:alias=pod"
+
+- name: Run pod again with network options
+  become: true
+  containers.podman.podman_pod:
+    executable: "{{ test_executable | default('podman') }}"
+    name: nettest
+    state: started
+    network: "{{ item.next_net }}:alias=pod"
+  register: info2
+
+- name: Check info
+  assert:
+    that:
+      - info2 is not changed
